@@ -1,0 +1,117 @@
+/* Breath Bubbles Site Custom Styles */
+:root {
+  --bb-bg: #0e1117;
+  --bb-bg-alt: #111927;
+  --bb-surface: #1c2431;
+  --bb-accent: #5dd6ff;
+  --bb-accent-glow: 180 100% 60%;
+  --bb-text: #e6edf3;
+  --bb-text-dim: #94a3b8;
+  --bb-gradient: radial-gradient(circle at 30% 30%, #1f2a38, #0e1117 70%);
+  --bb-radius: 18px;
+  --bb-transition: 0.35s cubic-bezier(.4,.18,.3,1);
+}
+
+html, body { height: 100%; }
+body.bb-home {
+  font-family: 'Inter', 'SF Pro Text', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--bb-text);
+  background: var(--bb-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.bb-hero {
+  position: relative;
+  min-height: clamp(640px, 90vh, 920px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(2rem, 5vh, 4rem) 1.25rem 4rem;
+}
+
+.bb-hero::before,
+.bb-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, rgba(93,214,255,.12), rgba(93,214,255,0) 60%),
+              radial-gradient(circle at 80% 20%, rgba(93,214,255,.18), transparent 60%),
+              radial-gradient(circle at 15% 85%, rgba(93,214,255,.15), transparent 55%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.bb-hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  line-height: 1.07;
+  margin: 0 0 1.1rem;
+  background: linear-gradient(92deg, #fff, #bbf2ff 35%, #5dd6ff 70%, #78eaff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: .5px;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.bb-hero .tagline {
+  max-width: 760px;
+  font-size: clamp(1.1rem, 1.9vw, 1.45rem);
+  line-height: 1.55;
+  margin: 0 auto 2.2rem;
+  color: var(--bb-text-dim);
+  font-weight: 400;
+}
+
+.bb-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.bb-button {
+  --_bg: linear-gradient(180deg, #64ddff, #34b6ff 60%, #1390d2);
+  position: relative;
+  font-size: 0.95rem;
+  padding: 0.95rem 1.35rem;
+  border-radius: 14px;
+  font-weight: 600;
+  letter-spacing: .4px;
+  text-decoration: none;
+  color: #042433;
+  background: var(--_bg);
+  box-shadow: 0 4px 18px -4px rgba(93,214,255,.45), 0 1px 0 0 rgba(255,255,255,.4) inset;
+  transition: var(--bb-transition);
+}
+.bb-button:hover { transform: translateY(-3px); box-shadow: 0 6px 28px -4px rgba(93,214,255,.55), 0 2px 0 0 rgba(255,255,255,.55) inset; }
+.bb-button:active { transform: translateY(0); }
+
+.bb-button.outline {
+  background: linear-gradient(var(--bb-bg), var(--bb-bg)) padding-box, linear-gradient(120deg,#2b4a57,#4db2d3,#2b95b7) border-box;
+  color: var(--bb-text);
+  border: 1px solid transparent;
+  box-shadow: 0 0 0 1px rgba(93,214,255,.25), 0 1px 0 0 rgba(255,255,255,.08) inset;
+}
+.bb-button.outline:hover { box-shadow: 0 0 0 1px rgba(93,214,255,.4), 0 2px 12px -2px rgba(93,214,255,.4); }
+
+/* Floating Bubbles Canvas */
+#breathBubblesCanvas { position:absolute; inset:0; width:100%; height:100%; z-index:0; }
+
+/* Feature grid */
+.bb-section { position:relative; z-index:1; padding: clamp(3rem, 8vh, 6rem) 1.25rem; }
+.bb-section h2 { text-align:center; font-size: clamp(2rem,4.5vw,3.2rem); margin:0 0 3rem; font-weight:600; letter-spacing:.5px; }
+
+.bb-grid { display:grid; gap:2rem; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); max-width:1240px; margin:0 auto; }
+.bb-card { background: linear-gradient(145deg,#1a2532,#131b25); border:1px solid #203246; padding:1.4rem 1.35rem 1.6rem; border-radius:18px; position:relative; overflow:hidden; backdrop-filter: blur(6px); box-shadow: 0 4px 12px -3px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.04) inset; transition: var(--bb-transition); }
+.bb-card::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 30% 20%, rgba(93,214,255,.18), transparent 65%); opacity:.65; mix-blend-mode:overlay; pointer-events:none; }
+.bb-card:hover { transform:translateY(-6px); box-shadow: 0 10px 28px -6px rgba(0,0,0,.55), 0 0 0 1px rgba(93,214,255,.3) inset; }
+.bb-card h3 { margin:0 0 .75rem; font-size:1.25rem; letter-spacing:.4px; font-weight:600; background:linear-gradient(90deg,#c2f3ff,#5dd6ff); background-clip:text; -webkit-background-clip:text; color:transparent; }
+.bb-card p { margin:0; font-size:.95rem; line-height:1.5; color: var(--bb-text-dim); }
+
+/* Footer */
+.bb-footer { padding:3rem 1.25rem 4rem; text-align:center; font-size:.8rem; color:#64748b; }
+.bb-footer a { color:#88e9ff; text-decoration:none; }
+.bb-footer a:hover { text-decoration:underline; }
+
+/* Responsive refinement */
+@media (min-width: 840px) {
+  .bb-hero .tagline { font-size: clamp(1.25rem, 1.4vw, 1.55rem); }
+}
