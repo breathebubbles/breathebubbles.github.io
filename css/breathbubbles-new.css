@@ -22,6 +22,7 @@
   --bb-text-primary: #0F2532;
   --bb-text-secondary: #486371;
   --bb-text-light: #7D95A3;
+  --bb-text-white: #ffffff;
 
   /* Elevated Gradients */
   --bb-gradient-main: linear-gradient(135deg, #5BA9F7 0%, #58B1AA 52%, #FF8AAE 100%);
@@ -35,6 +36,31 @@
   --bb-shadow-lg: 0 10px 32px -6px rgba(91,169,247,0.28), 0 4px 12px -4px rgba(0,0,0,0.12);
   --bb-shadow-xl: 0 18px 46px -8px rgba(88,177,170,0.32), 0 10px 22px -6px rgba(0,0,0,0.18);
   --bb-shadow-bubble: 0 12px 40px -4px rgba(91,169,247,0.45);
+
+  /* Spacing */
+  --bb-spacing-xs: 0.5rem;
+  --bb-spacing-sm: 1rem;
+  --bb-spacing-md: 1.5rem;
+  --bb-spacing-lg: 2rem;
+  --bb-spacing-xl: 3rem;
+  --bb-spacing-2xl: 4rem;
+  --bb-spacing-3xl: 6rem;
+
+  /* Radii */
+  --bb-radius-sm: 8px;
+  --bb-radius-md: 12px;
+  --bb-radius-lg: 16px;
+  --bb-radius-xl: 24px;
+  --bb-radius-full: 50%;
+
+  /* Transitions */
+  --bb-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bb-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-index */
+  --bb-z-nav: 1000;
+  --bb-z-modal: 2000;
+  --bb-z-canvas: -1;
 }
 
 /* ========================================
@@ -255,14 +281,52 @@ button {
   margin-right:auto;
 }
 
-/* Navigation refinement */
-.bb-nav-links a { font-weight: 500; }
-.bb-nav-links a:hover { color: var(--bb-primary-dark); }
+.bb-download-buttons {
+  display: flex;
+  gap: var(--bb-spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-/* Glass buttons */
-.bb-download-btn { position: relative; background: var(--bb-surface-glass); border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 2px 4px -1px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.2) inset; }
-.bb-download-btn:before { content:''; position:absolute; inset:0; border-radius:inherit; background: linear-gradient(140deg, rgba(255,255,255,0.65), rgba(255,255,255,0.15)); pointer-events:none; mix-blend-mode:overlay; }
-.bb-download-btn:hover { background: rgba(255,255,255,0.9); }
+.bb-download-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--bb-spacing-sm);
+  padding: var(--bb-spacing-md) var(--bb-spacing-lg);
+  position: relative;
+  background: var(--bb-surface-glass);
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.2) inset;
+  color: var(--bb-text-primary);
+  border-radius: var(--bb-radius-md);
+  font-weight: 500;
+  transition: var(--bb-transition);
+  text-decoration: none;
+}
+
+.bb-download-btn:hover {
+  background: rgba(255,255,255,0.9);
+  transform: translateY(-2px);
+  box-shadow: var(--bb-shadow-lg);
+}
+
+.bb-download-icon {
+  font-size: 1.5rem;
+}
+
+.bb-download-text {
+  text-align: left;
+}
+
+.bb-download-small {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.bb-download-big {
+  font-size: 1rem;
+  font-weight: 600;
+}
 
 /* ========================================
    Features Section
@@ -294,10 +358,15 @@ button {
   border: 1px solid rgba(91,169,247,0.18);
   box-shadow: var(--bb-shadow-md);
   transition: var(--bb-transition);
+  padding: var(--bb-spacing-xl);
+  border-radius: var(--bb-radius-xl);
+  text-align: center;
 }
 
 .bb-feature-card:hover {
   border-color: rgba(91,169,247,0.35);
+  transform: translateY(-8px);
+  box-shadow: var(--bb-shadow-xl);
 }
 
 .bb-feature-icon {
@@ -501,7 +570,7 @@ button {
 .bb-watch-bubble {
   width: 60px;
   height: 60px;
-  background: var(--bb-gradient-bubble);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(124,196,255,0.25));
   border-radius: var(--bb-radius-full);
   margin: 0 auto var(--bb-spacing-md);
   animation: breathPulse 4s ease-in-out infinite;
@@ -611,14 +680,19 @@ button {
 }
 
 .bb-testimonial-card {
-  background: linear-gradient(160deg, rgba(28,44,56,0.95), rgba(28,44,56,0.65));
+  background: linear-gradient(160deg, rgba(255,255,255,0.95), rgba(255,255,255,0.65));
   border: 1px solid rgba(91,169,247,0.15);
   backdrop-filter: blur(20px);
+  border-radius: var(--bb-radius-xl);
+  padding: var(--bb-spacing-xl);
+  box-shadow: var(--bb-shadow-md);
   transition: var(--bb-transition);
 }
 
 .bb-testimonial-card:hover {
   border-color: rgba(91,169,247,0.30);
+  transform: translateY(-4px);
+  box-shadow: var(--bb-shadow-lg);
 }
 
 .bb-testimonial-bubble {
@@ -626,6 +700,7 @@ button {
   padding: var(--bb-spacing-lg);
   border-radius: var(--bb-radius-lg);
   margin-bottom: var(--bb-spacing-lg);
+  position: relative;
 }
 
 .bb-testimonial-bubble::after {
@@ -842,6 +917,30 @@ button {
   text-shadow: 0 0 6px rgba(123,196,255,0.55);
 }
 
+.bb-lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bb-lang-switcher button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  font-size: inherit;
+  transition: var(--bb-transition);
+}
+
+.bb-lang-switcher button:hover {
+  color: #fff;
+}
+
+.bb-lang-switcher button.active {
+  color: var(--bb-primary-light);
+  font-weight: 600;
+}
+
 .bb-footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: var(--bb-spacing-lg);
@@ -986,7 +1085,13 @@ button {
   .bb-feature-card:hover { border-color: rgba(124,196,255,0.35); }
   .bb-screenshots { background: linear-gradient(135deg,#0F1B26 0%, #0E2327 60%, #1A2633 100%); }
   .bb-testimonials { background: linear-gradient(135deg,#13222D 0%, #182D38 60%, #1B2431 100%); }
-  .bb-testimonial-card { background: linear-gradient(160deg, rgba(28,44,56,0.85), rgba(28,44,56,0.55)); border-color: rgba(124,196,255,0.15); }
+  .bb-testimonial-card { 
+    background: linear-gradient(160deg, rgba(28,44,56,0.85), rgba(28,44,56,0.55)); 
+    border-color: rgba(124,196,255,0.15); 
+  }
+  .bb-testimonial-card:hover { 
+    border-color: rgba(124,196,255,0.35); 
+  }
   .bb-about { background: linear-gradient(180deg,#101D27 0%, #0E141A 100%); }
   .bb-final-cta { background: linear-gradient(140deg,#153447 0%, #19565E 55%, #5A2E45 110%); }
   .bb-footer { background: #0A1116; }
@@ -994,7 +1099,19 @@ button {
   .bb-breathing-bubble { box-shadow: 0 16px 48px -12px rgba(124,196,255,0.45); }
 }
 
+/* Micro-interactions */
+.bb-feature-card, .bb-testimonial-card, .bb-download-btn, .bb-breathing-btn {
+  transition: transform .5s cubic-bezier(.16,.8,.24,1), box-shadow .4s ease, border-color .4s ease;
+}
+
+.bb-feature-card:hover, .bb-testimonial-card:hover {
+  transform: translateY(-6px) translateZ(0);
+}
+
 /* Accessibility tweaks */
-.bb-download-btn:focus-visible, .bb-breathing-btn:focus-visible, .bb-feature-card:focus-within { outline: 2px solid var(--bb-primary-light); outline-offset: 3px; }
+.bb-download-btn:focus-visible, .bb-breathing-btn:focus-visible, .bb-feature-card:focus-within {
+  outline: 2px solid var(--bb-primary-light);
+  outline-offset: 3px;
+}
 
 /* EOF overrides */
