@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title id="pageTitle">呼吸泡泡 - 一口呼吸，泡走压力</title>
+    <title id="pageTitle">呼吸泡泡 - 让每一次呼吸都充满意义</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="呼吸泡泡：基于HRV的智能压力监测，配合治愈系呼吸训练动画，帮助年轻人减压放松。支持iPhone和Apple Watch。">
     <meta name="keywords" content="呼吸训练,压力监测,HRV,冥想,放松,减压,Apple Watch,健康">
@@ -66,11 +66,11 @@
                 <h1 id="heroTitle">呼吸泡泡</h1>
                 <div class="bb-logo-subtitle" id="heroSubtitle">BreathBubbles</div>
             </div>
-            <p class="bb-tagline" id="heroTagline">一口呼吸，泡走压力</p>
+            <p class="bb-tagline" id="heroTagline">让每一次呼吸都充满意义</p>
             <p class="bb-description" id="heroDescription">基于心率变异性(HRV)的智能压力监测，配合治愈系呼吸训练动画，帮助你找回内心的平静与专注</p>
             
             <div class="bb-download-buttons">
-                <a href="#" class="bb-download-btn app-store">
+                <a href="https://apps.apple.com/cn/app/%E5%91%BC%E5%90%B8%E6%B3%A1%E6%B3%A1/id6743337849" class="bb-download-btn app-store" target="_blank" rel="noopener noreferrer">
                     <div class="bb-download-icon">📱</div>
                     <div class="bb-download-text">
                         <div class="bb-download-small">Download on the</div>
@@ -280,7 +280,7 @@
             <p id="finalCtaDesc">下载呼吸泡泡，让每一次呼吸都成为放松的开始</p>
             
             <div class="bb-download-buttons">
-                <a href="#" class="bb-download-btn app-store">
+                <a href="https://apps.apple.com/cn/app/%E5%91%BC%E5%90%B8%E6%B3%A1%E6%B3%A1/id6743337849" class="bb-download-btn app-store" target="_blank" rel="noopener noreferrer">
                     <div class="bb-download-icon">📱</div>
                     <div class="bb-download-text">
                         <div class="bb-download-small">Download on the</div>
@@ -504,6 +504,51 @@
         var saved = localStorage.getItem('bb_lang') || 'zh';
         apply(saved);
       });
+    })();
+
+    // Add Google Play click handler and toast message
+    (function(){
+      function showToast(msg){
+        var t = document.createElement('div');
+        t.className = 'bb-toast';
+        t.textContent = msg;
+        Object.assign(t.style, {
+          position: 'fixed',
+          left: '50%',
+          bottom: '40px',
+          transform: 'translateX(-50%)',
+          background: 'rgba(0,0,0,0.8)',
+          color: '#fff',
+          padding: '10px 16px',
+          borderRadius: '20px',
+          zIndex: 9999,
+          fontSize: '14px',
+          opacity: '0',
+          transition: 'opacity 0.25s ease'
+        });
+        document.body.appendChild(t);
+        // force paint
+        window.getComputedStyle(t).opacity;
+        t.style.opacity = '1';
+        setTimeout(function(){ t.style.opacity = '0'; setTimeout(function(){ t.remove(); }, 250); }, 2000);
+      }
+
+      function bindGooglePlay(){
+        var els = document.querySelectorAll('.bb-download-btn.google-play');
+        els.forEach(function(el){
+          // prevent multiple bindings
+          if(el._bb_bound) return; el._bb_bound = true;
+          el.addEventListener('click', function(e){
+            e.preventDefault();
+            var lang = document.documentElement.lang === 'zh-CN' ? 'zh' : 'en';
+            var msg = lang === 'zh' ? '敬请期待' : 'Coming soon';
+            showToast(msg);
+          });
+        });
+      }
+
+      if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindGooglePlay);
+      else bindGooglePlay();
     })();
     </script>
 </body>
