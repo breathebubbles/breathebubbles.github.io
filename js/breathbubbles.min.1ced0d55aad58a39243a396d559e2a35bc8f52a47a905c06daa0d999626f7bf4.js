@@ -1,5 +1,158 @@
 // ========================================
-// Enhanced BreathBubbles JavaScript
+// Language Support System
+// ========================================
+
+class LanguageManager {
+  constructor() {
+    this.currentLang = 'zh'; // Default to Chinese
+    this.supportedLangs = ['zh', 'en'];
+    this.breathingTexts = {
+      zh: ['吸气', '屏息', '呼气', '暂停'],
+      en: ['Inhale', 'Hold', 'Exhale', 'Pause']
+    };
+    
+    this.init();
+  }
+  
+  init() {
+    // Detect user's preferred language
+    this.detectLanguage();
+    
+    // Set up language switch buttons
+    this.setupLanguageSwitcher();
+    
+    // Apply initial language
+    this.applyLanguage(this.currentLang);
+  }
+  
+  detectLanguage() {
+    // Check localStorage first
+    const savedLang = localStorage.getItem('bb-language');
+    if (savedLang && this.supportedLangs.includes(savedLang)) {
+      this.currentLang = savedLang;
+      return;
+    }
+    
+    // Check browser language
+    const browserLang = navigator.language || navigator.userLanguage;
+    if (browserLang.startsWith('zh')) {
+      this.currentLang = 'zh';
+    } else {
+      this.currentLang = 'en';
+    }
+    
+    // Check user's region for more specific detection
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        // This is a simple example - in reality you'd use a geolocation service
+        // For now, we'll use the browser language detection
+      }, () => {
+        // Geolocation failed, keep browser language detection
+      });
+    }
+  }
+  
+  setupLanguageSwitcher() {
+    const langButtons = document.querySelectorAll('.bb-lang-btn');
+    
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const newLang = btn.getAttribute('data-lang');
+        this.switchLanguage(newLang);
+      });
+    });
+  }
+  
+  switchLanguage(lang) {
+    if (!this.supportedLangs.includes(lang) || lang === this.currentLang) {
+      return;
+    }
+    
+    this.currentLang = lang;
+    this.applyLanguage(lang);
+    
+    // Save to localStorage
+    localStorage.setItem('bb-language', lang);
+    
+    // Update URL if needed (optional)
+    this.updateURL(lang);
+  }
+  
+  applyLanguage(lang) {
+    // Update document language
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.body.setAttribute('data-lang', lang);
+    
+    // Update all elements with language data attributes
+    const elements = document.querySelectorAll('[data-zh], [data-en]');
+    elements.forEach(element => {
+      const text = element.getAttribute(`data-${lang}`);
+      if (text) {
+        if (element.tagName === 'INPUT' || element.tagName === 'BUTTON') {
+          element.textContent = text;
+        } else {
+          element.innerHTML = text;
+        }
+      }
+    });
+    
+    // Update language switcher buttons
+    document.querySelectorAll('.bb-lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    
+    // Update page title and meta description
+    this.updatePageMeta(lang);
+    
+    // Update breathing exercise texts if active
+    this.updateBreathingTexts(lang);
+  }
+  
+  updatePageMeta(lang) {
+    const titles = {
+      zh: '呼吸泡泡 - 一口呼吸，泡走压力',
+      en: 'BreathBubbles - One breath, bubble away stress'
+    };
+    
+    const descriptions = {
+      zh: '呼吸泡泡：基于HRV的智能压力监测，配合治愈系呼吸训练动画，帮助年轻人减压放松。支持iPhone和Apple Watch。',
+      en: 'BreathBubbles: HRV-based intelligent stress monitoring with healing breathing animations to help young people reduce stress and relax. Support iPhone and Apple Watch.'
+    };
+    
+    document.title = titles[lang];
+    
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.content = descriptions[lang];
+    }
+  }
+  
+  updateBreathingTexts(lang) {
+    // Update breathing exercise if it's running
+    const breathingExercise = window.breathingExerciseInstance;
+    if (breathingExercise) {
+      breathingExercise.phases = this.breathingTexts[lang];
+    }
+  }
+  
+  updateURL(lang) {
+    // Optional: Update URL to reflect language choice
+    const url = new URL(window.location);
+    url.searchParams.set('lang', lang);
+    window.history.replaceState({}, '', url);
+  }
+  
+  getCurrentLanguage() {
+    return this.currentLang;
+  }
+  
+  getBreathingTexts(lang = this.currentLang) {
+    return this.breathingTexts[lang] || this.breathingTexts.zh;
+  }
+}
+
+// ========================================
+// Enhanced BreathingExercise with Language Support
 // ========================================
 
 class BreathingExercise {
@@ -16,12 +169,25 @@ class BreathingExercise {
     this.timer = document.querySelector('.bb-breathing-timer');
     this.btn = document.getElementById('startBreathing');
     
+    // Store reference for language updates
+    window.breathingExerciseInstance = this;
+    
     this.init();
   }
   
   init() {
     if (this.btn) {
       this.btn.addEventListener('click', () => this.toggle());
+    }
+    
+    // Update phases based on current language
+    this.updateLanguage();
+  }
+  
+  updateLanguage() {
+    const langManager = window.languageManagerInstance;
+    if (langManager) {
+      this.phases = langManager.getBreathingTexts();
     }
   }
   
@@ -39,7 +205,15 @@ class BreathingExercise {
     this.phaseStartTime = Date.now();
     this.currentPhase = 0;
     
-    this.btn.textContent = '停止练习';
+    // Update button text based on current language
+    const langManager = window.languageManagerInstance;
+    const currentLang = langManager ? langManager.getCurrentLanguage() : 'zh';
+    const stopTexts = {
+      zh: '停止练习',
+      en: 'Stop Practice'
+    };
+    
+    this.btn.textContent = stopTexts[currentLang];
     this.btn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
     
     this.animate();
@@ -48,13 +222,22 @@ class BreathingExercise {
   
   stop() {
     this.isActive = false;
-    this.btn.textContent = '开始练习';
+    
+    // Update button text based on current language
+    const langManager = window.languageManagerInstance;
+    const currentLang = langManager ? langManager.getCurrentLanguage() : 'zh';
+    const startTexts = {
+      zh: '开始练习',
+      en: 'Start Practice'
+    };
+    
+    this.btn.textContent = startTexts[currentLang];
     this.btn.style.background = '';
     
     // Reset bubble
     if (this.bubble) {
       this.bubble.style.transform = 'scale(1)';
-      this.text.textContent = '吸气';
+      this.text.textContent = this.phases[0];
     }
   }
   
@@ -332,6 +515,10 @@ document.head.appendChild(style);
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize language manager first
+  window.languageManagerInstance = new LanguageManager();
+  
+  // Then initialize other components
   new BreathingExercise();
   new SmoothScroll();
   new ParallaxEffects();
