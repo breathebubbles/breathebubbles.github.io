@@ -1,1 +1,403 @@
-class BreathBubbles{constructor(e,t={}){this.canvas=e,this.ctx=e.getContext("2d"),this.dpr=window.devicePixelRatio||1,this.options=Object.assign({bubbleCount:42,baseHue:190,hueRange:40,minRadius:14,maxRadius:64,floatSpeed:[.12,.55],wobbleStrength:.55,breathingPeriod:6400,connectionDistance:148,interactiveForce:.12,parallax:.06},t),this.bubbles=[],this.t0=performance.now(),this.mouse={x:0,y:0,active:!1},this.resizeObserver=new ResizeObserver(()=>this.resize()),this.resizeObserver.observe(e),this.bind(),this.resize(),this.init(),requestAnimationFrame(()=>this.frame())}bind(){window.addEventListener("pointermove",e=>{const t=this.canvas.getBoundingClientRect();this.mouse.x=(e.clientX-t.left)*this.dpr,this.mouse.y=(e.clientY-t.top)*this.dpr,this.mouse.active=!0}),window.addEventListener("pointerleave",()=>this.mouse.active=!1),window.addEventListener("resize",()=>this.resize()),window.addEventListener("visibilitychange",()=>{document.visibilityState==="visible"&&(this.t0=performance.now())})}resize(){const{width:e,height:t}=this.canvas.getBoundingClientRect();this.canvas.width=e*this.dpr,this.canvas.height=t*this.dpr}rand(e,t){return Math.random()*(t-e)+e}init(){this.bubbles.length=0;for(let e=0;e<this.options.bubbleCount;e++)this.bubbles.push(this.makeBubble())}makeBubble(){const e=this.rand(this.options.minRadius,this.options.maxRadius);return{x:Math.random()*this.canvas.width,y:Math.random()*this.canvas.height,r:e,baseR:e,hue:this.options.baseHue+this.rand(-this.options.hueRange/2,this.options.hueRange/2),vy:-this.rand(this.options.floatSpeed[0],this.options.floatSpeed[1]),vx:this.rand(-.15,.15),wobbleSeed:Math.random()*1e3}}frame(){const n=performance.now(),e=n-this.t0;this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);const t=(Math.sin(e/this.options.breathingPeriod*Math.PI*2)+1)/2;for(const n of this.bubbles){const s=.82+t*.36;if(n.r=n.baseR*s,n.y+=n.vy*(.6+t*.8),n.x+=n.vx+Math.sin((e+n.wobbleSeed)*.0018)*this.options.wobbleStrength,n.y+n.r<0&&(n.y=this.canvas.height+n.r*2,n.x=Math.random()*this.canvas.width),n.x-n.r>this.canvas.width?n.x=-n.r:n.x+n.r<0&&(n.x=this.canvas.width+n.r),this.mouse.active){const e=n.x-this.mouse.x,t=n.y-this.mouse.y,s=Math.hypot(e,t);if(s<180*this.dpr){const o=(1-s/(180*this.dpr))*this.options.interactiveForce;n.x+=e*o,n.y+=t*o}}}this.ctx.lineWidth=1*this.dpr;for(let t=0;t<this.bubbles.length;t++){const e=this.bubbles[t];for(let s=t+1;s<this.bubbles.length;s++){const n=this.bubbles[s],i=e.x-n.x,a=e.y-n.y,o=Math.hypot(i,a);if(o<this.options.connectionDistance*this.dpr){const t=1-o/(this.options.connectionDistance*this.dpr);this.ctx.strokeStyle=`hsla(${(e.hue+n.hue)/2}, 80%, 62%, ${t*.12})`,this.ctx.beginPath(),this.ctx.moveTo(e.x,e.y),this.ctx.lineTo(n.x,n.y),this.ctx.stroke()}}}for(const e of this.bubbles){const t=this.ctx.createRadialGradient(e.x-e.r*.4,e.y-e.r*.5,e.r*.1,e.x,e.y,e.r);t.addColorStop(0,`hsla(${e.hue}, 95%, 78%, 0.85)`),t.addColorStop(.55,`hsla(${e.hue+10}, 85%, 62%, 0.45)`),t.addColorStop(1,`hsla(${e.hue}, 90%, 40%, 0.10)`),this.ctx.fillStyle=t,this.ctx.beginPath(),this.ctx.arc(e.x,e.y,e.r,0,Math.PI*2),this.ctx.fill(),this.ctx.strokeStyle=`hsla(${e.hue}, 95%, 82%, 0.35)`,this.ctx.lineWidth=1.2*this.dpr,this.ctx.stroke()}requestAnimationFrame(()=>this.frame())}}function initBreathBubbles(){const e=document.getElementById("breathBubblesCanvas");if(!e)return;new BreathBubbles(e)}document.readyState!=="loading"?initBreathBubbles():document.addEventListener("DOMContentLoaded",initBreathBubbles)
+// ========================================
+// Enhanced BreathBubbles JavaScript
+// ========================================
+
+class BreathingExercise {
+  constructor() {
+    this.isActive = false;
+    this.startTime = 0;
+    this.phases = ['吸气', '屏息', '呼气', '暂停'];
+    this.phaseDurations = [4000, 1000, 4000, 1000]; // 4-1-4-1 breathing pattern
+    this.currentPhase = 0;
+    this.phaseStartTime = 0;
+    
+    this.bubble = document.querySelector('.bb-breathing-bubble');
+    this.text = document.querySelector('.bb-breathing-text');
+    this.timer = document.querySelector('.bb-breathing-timer');
+    this.btn = document.getElementById('startBreathing');
+    
+    this.init();
+  }
+  
+  init() {
+    if (this.btn) {
+      this.btn.addEventListener('click', () => this.toggle());
+    }
+  }
+  
+  toggle() {
+    if (this.isActive) {
+      this.stop();
+    } else {
+      this.start();
+    }
+  }
+  
+  start() {
+    this.isActive = true;
+    this.startTime = Date.now();
+    this.phaseStartTime = Date.now();
+    this.currentPhase = 0;
+    
+    this.btn.textContent = '停止练习';
+    this.btn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+    
+    this.animate();
+    this.updateTimer();
+  }
+  
+  stop() {
+    this.isActive = false;
+    this.btn.textContent = '开始练习';
+    this.btn.style.background = '';
+    
+    // Reset bubble
+    if (this.bubble) {
+      this.bubble.style.transform = 'scale(1)';
+      this.text.textContent = '吸气';
+    }
+  }
+  
+  animate() {
+    if (!this.isActive) return;
+    
+    const now = Date.now();
+    const phaseElapsed = now - this.phaseStartTime;
+    const phaseDuration = this.phaseDurations[this.currentPhase];
+    
+    // Check if we need to move to next phase
+    if (phaseElapsed >= phaseDuration) {
+      this.currentPhase = (this.currentPhase + 1) % this.phases.length;
+      this.phaseStartTime = now;
+    }
+    
+    // Update text
+    if (this.text) {
+      this.text.textContent = this.phases[this.currentPhase];
+    }
+    
+    // Animate bubble based on phase
+    if (this.bubble) {
+      const progress = (now - this.phaseStartTime) / this.phaseDurations[this.currentPhase];
+      let scale = 1;
+      
+      if (this.currentPhase === 0) { // 吸气
+        scale = 1 + (progress * 0.5);
+      } else if (this.currentPhase === 1) { // 屏息
+        scale = 1.5;
+      } else if (this.currentPhase === 2) { // 呼气
+        scale = 1.5 - (progress * 0.5);
+      } else { // 暂停
+        scale = 1;
+      }
+      
+      this.bubble.style.transform = `scale(${scale})`;
+    }
+    
+    requestAnimationFrame(() => this.animate());
+  }
+  
+  updateTimer() {
+    if (!this.isActive) return;
+    
+    const elapsed = Date.now() - this.startTime;
+    const minutes = Math.floor(elapsed / 60000);
+    const seconds = Math.floor((elapsed % 60000) / 1000);
+    
+    if (this.timer) {
+      this.timer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    setTimeout(() => this.updateTimer(), 1000);
+  }
+}
+
+class SmoothScroll {
+  constructor() {
+    this.init();
+  }
+  
+  init() {
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          const navHeight = document.querySelector('.bb-nav')?.offsetHeight || 0;
+          const targetPosition = target.offsetTop - navHeight - 20;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  }
+}
+
+class ParallaxEffects {
+  constructor() {
+    this.init();
+  }
+  
+  init() {
+    window.addEventListener('scroll', () => {
+      this.updateParallax();
+    });
+  }
+  
+  updateParallax() {
+    const scrolled = window.pageYOffset;
+    const rate = scrolled * -0.5;
+    
+    // Parallax effect for hero background
+    const hero = document.querySelector('.bb-hero');
+    if (hero) {
+      hero.style.transform = `translateY(${rate}px)`;
+    }
+    
+    // Parallax effect for floating elements
+    document.querySelectorAll('.bb-team-member').forEach((member, index) => {
+      const rate = scrolled * -0.1 * (index + 1);
+      member.style.transform = `translateY(${rate}px)`;
+    });
+  }
+}
+
+class NavigationController {
+  constructor() {
+    this.nav = document.querySelector('.bb-nav');
+    this.lastScrollTop = 0;
+    this.init();
+  }
+  
+  init() {
+    window.addEventListener('scroll', () => {
+      this.updateNavigation();
+    });
+    
+    // Mobile menu toggle
+    const toggle = document.querySelector('.bb-nav-mobile-toggle');
+    const links = document.querySelector('.bb-nav-links');
+    
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        links.classList.toggle('active');
+      });
+    }
+  }
+  
+  updateNavigation() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (this.nav) {
+      if (scrollTop > 100) {
+        this.nav.style.background = 'rgba(255, 255, 255, 0.98)';
+        this.nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+      } else {
+        this.nav.style.background = 'rgba(255, 255, 255, 0.95)';
+        this.nav.style.boxShadow = 'none';
+      }
+      
+      // Hide/show nav on scroll
+      if (scrollTop > this.lastScrollTop && scrollTop > 200) {
+        this.nav.style.transform = 'translateY(-100%)';
+      } else {
+        this.nav.style.transform = 'translateY(0)';
+      }
+    }
+    
+    this.lastScrollTop = scrollTop;
+  }
+}
+
+class AnimationObserver {
+  constructor() {
+    this.init();
+  }
+  
+  init() {
+    // Create intersection observer for animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    // Observe elements that should animate in
+    document.querySelectorAll('.bb-feature-card, .bb-testimonial-card, .bb-phone-mockup, .bb-watch-mockup').forEach(el => {
+      observer.observe(el);
+    });
+  }
+}
+
+class BubbleBackground {
+  constructor() {
+    this.createFloatingBubbles();
+  }
+  
+  createFloatingBubbles() {
+    const sections = document.querySelectorAll('.bb-section');
+    
+    sections.forEach(section => {
+      if (Math.random() > 0.5) { // Add bubbles to random sections
+        const bubble = document.createElement('div');
+        bubble.className = 'floating-bubble';
+        bubble.style.cssText = `
+          position: absolute;
+          width: ${20 + Math.random() * 40}px;
+          height: ${20 + Math.random() * 40}px;
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(139, 92, 246, 0.3));
+          border-radius: 50%;
+          top: ${Math.random() * 100}%;
+          left: ${Math.random() * 100}%;
+          animation: floatUpDown ${3 + Math.random() * 4}s ease-in-out infinite;
+          animation-delay: ${Math.random() * 2}s;
+          pointer-events: none;
+          z-index: 0;
+        `;
+        
+        section.style.position = 'relative';
+        section.appendChild(bubble);
+      }
+    });
+  }
+}
+
+// Custom scroll animations
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes floatUpDown {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.1); }
+  }
+  
+  .bb-feature-card,
+  .bb-testimonial-card,
+  .bb-phone-mockup,
+  .bb-watch-mockup {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .bb-feature-card.animate-in,
+  .bb-testimonial-card.animate-in,
+  .bb-phone-mockup.animate-in,
+  .bb-watch-mockup.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @media (max-width: 768px) {
+    .bb-nav-links {
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      padding: 2rem;
+      transform: translateY(-100%);
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    
+    .bb-nav-links.active {
+      transform: translateY(0);
+    }
+    
+    .bb-nav-mobile-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .bb-nav-mobile-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .bb-nav-mobile-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+  }
+`;
+document.head.appendChild(style);
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  new BreathingExercise();
+  new SmoothScroll();
+  new ParallaxEffects();
+  new NavigationController();
+  new AnimationObserver();
+  new BubbleBackground();
+  
+  // Add some interactive touches
+  addInteractiveTouches();
+});
+
+function addInteractiveTouches() {
+  // Add hover effects to download buttons
+  document.querySelectorAll('.bb-download-btn').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      btn.style.transform = 'translateY(-4px) scale(1.02)';
+    });
+    
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+  
+  // Add click effect to feature cards
+  document.querySelectorAll('.bb-feature-card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.style.transform = 'translateY(-12px)';
+      setTimeout(() => {
+        card.style.transform = '';
+      }, 200);
+    });
+  });
+  
+  // Add testimonial card interactions
+  document.querySelectorAll('.bb-testimonial-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.querySelector('.bb-author-avatar').style.transform = 'scale(1.1) rotate(5deg)';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.querySelector('.bb-author-avatar').style.transform = '';
+    });
+  });
+  
+  // Add loading states for download buttons
+  document.querySelectorAll('.bb-download-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<div style="display: flex; align-items: center; gap: 8px;"><div style="width: 16px; height: 16px; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>Loading...</div>';
+      
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        alert('这里会跳转到相应的应用商店！');
+      }, 2000);
+    });
+  });
+}
+
+// Add spin animation for loading
+const spinStyle = document.createElement('style');
+spinStyle.textContent = `
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+document.head.appendChild(spinStyle);
