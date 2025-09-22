@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>呼吸泡泡 - 一口呼吸，泡走压力</title>
+    <title id="pageTitle">呼吸泡泡 - 一口呼吸，泡走压力</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="呼吸泡泡：基于HRV的智能压力监测，配合治愈系呼吸训练动画，帮助年轻人减压放松。支持iPhone和Apple Watch。">
     <meta name="keywords" content="呼吸训练,压力监测,HRV,冥想,放松,减压,Apple Watch,健康">
@@ -31,8 +31,6 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
-
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/breathbubbles.min.809837df104cfb6208ace5e2f0b41614bcf67ecae7feb9e8e8a7add2e2d73166.css">
 </head>
 
@@ -42,14 +40,14 @@
         <div class="bb-nav-container">
             <div class="bb-nav-logo">
                 <span class="bb-nav-logo-icon">🫧</span>
-                <span class="bb-nav-logo-text">呼吸泡泡</span>
+                <span class="bb-nav-logo-text" id="brandName">呼吸泡泡</span>
             </div>
             <div class="bb-nav-links">
-                <a href="#features">功能</a>
-                <a href="#screenshots">界面</a>
-                <a href="#breathing">练习</a>
-                <a href="#testimonials">反馈</a>
-                <a href="#about">关于</a>
+                <a href="#features" id="navFeatures">功能</a>
+                <a href="#screenshots" id="navScreenshots">界面</a>
+                <a href="#breathing" id="navBreathing">练习</a>
+                <a href="#testimonials" id="navTestimonials">反馈</a>
+                <a href="#about" id="navAbout">关于</a>
             </div>
             <div class="bb-nav-mobile-toggle">
                 <span></span>
@@ -65,11 +63,11 @@
         <div class="bb-hero-content">
             <div class="bb-logo">
                 <div class="bb-logo-icon">🫧</div>
-                <h1>呼吸泡泡</h1>
-                <div class="bb-logo-subtitle">BreathBubbles</div>
+                <h1 id="heroTitle">呼吸泡泡</h1>
+                <div class="bb-logo-subtitle" id="heroSubtitle">BreathBubbles</div>
             </div>
-            <p class="bb-tagline">一口呼吸，泡走压力</p>
-            <p class="bb-description">基于心率变异性(HRV)的智能压力监测，配合治愈系呼吸训练动画，帮助你找回内心的平静与专注</p>
+            <p class="bb-tagline" id="heroTagline">一口呼吸，泡走压力</p>
+            <p class="bb-description" id="heroDescription">基于心率变异性(HRV)的智能压力监测，配合治愈系呼吸训练动画，帮助你找回内心的平静与专注</p>
             
             <div class="bb-download-buttons">
                 <a href="#" class="bb-download-btn app-store">
@@ -93,30 +91,30 @@
     <!-- Features Section -->
     <section id="features" class="bb-section bb-features">
         <div class="bb-container">
-            <h2>核心功能</h2>
+            <h2 id="featuresTitle">核心功能</h2>
             <div class="bb-features-grid">
                 <div class="bb-feature-card">
                     <div class="bb-feature-icon">📊</div>
-                    <h3>实时压力监测</h3>
-                    <p>基于心率变异性(HRV)技术，实时分析你的压力状态，提供科学准确的健康数据</p>
+                    <h3 id="feature1Title">实时压力监测</h3>
+                    <p id="feature1Desc">基于心率变异性(HRV)技术，实时分析你的压力状态，提供科学准确的健康数据</p>
                 </div>
                 
                 <div class="bb-feature-card">
                     <div class="bb-feature-icon">🫧</div>
-                    <h3>呼吸训练动画</h3>
-                    <p>跟随美丽的泡泡节奏呼吸，4-7-8呼吸法与正念呼吸，让身心回归平静</p>
+                    <h3 id="feature2Title">呼吸训练动画</h3>
+                    <p id="feature2Desc">跟随美丽的泡泡节奏呼吸，4-7-8呼吸法与正念呼吸，让身心回归平静</p>
                 </div>
                 
                 <div class="bb-feature-card">
                     <div class="bb-feature-icon">📈</div>
-                    <h3>数据统计分析</h3>
-                    <p>压力日历、趋势图表、热力图展示，帮你了解压力变化规律，优化生活节奏</p>
+                    <h3 id="feature3Title">数据统计分析</h3>
+                    <p id="feature3Desc">压力日历、趋势图表、热力图展示，帮你了解压力变化规律，优化生活节奏</p>
                 </div>
                 
                 <div class="bb-feature-card">
                     <div class="bb-feature-icon">⌚</div>
-                    <h3>多端完美同步</h3>
-                    <p>iPhone & Apple Watch 无缝同步，随时随地开始你的减压之旅</p>
+                    <h3 id="feature4Title">多端完美同步</h3>
+                    <p id="feature4Desc">iPhone & Apple Watch 无缝同步，随时随地开始你的减压之旅</p>
                 </div>
             </div>
         </div>
@@ -125,8 +123,8 @@
     <!-- Screenshots Section -->
     <section id="screenshots" class="bb-section bb-screenshots">
         <div class="bb-container">
-            <h2>精美界面</h2>
-            <p class="bb-section-desc">治愈系设计，让每次使用都是一次心灵的放松</p>
+            <h2 id="screenshotsTitle">精美界面</h2>
+            <p class="bb-section-desc" id="screenshotsDesc">治愈系设计，让每次使用都是一次心灵的放松</p>
             
             <div class="bb-screenshots-container">
                 <div class="bb-phone-mockup">
@@ -173,12 +171,12 @@
     <!-- Breathing Exercise Section -->
     <section id="breathing" class="bb-section bb-breathing">
         <div class="bb-container">
-            <h2>体验呼吸练习</h2>
-            <p class="bb-section-desc">跟随下方的泡泡一起呼吸，感受内心的平静</p>
+            <h2 id="breathingTitle">体验呼吸练习</h2>
+            <p class="bb-section-desc" id="breathingDesc">跟随下方的泡泡一起呼吸，感受内心的平静</p>
             
             <div class="bb-breathing-demo">
                 <div class="bb-breathing-bubble">
-                    <div class="bb-breathing-text">吸气</div>
+                    <div class="bb-breathing-text" id="breathingBubbleText">吸气</div>
                 </div>
                 <div class="bb-breathing-controls">
                     <button class="bb-breathing-btn" id="startBreathing">开始练习</button>
@@ -191,43 +189,43 @@
     <!-- Testimonials Section -->
     <section id="testimonials" class="bb-section bb-testimonials">
         <div class="bb-container">
-            <h2>用户反馈</h2>
+            <h2 id="testimonialsTitle">用户反馈</h2>
             <div class="bb-testimonials-grid">
                 <div class="bb-testimonial-card">
                     <div class="bb-testimonial-bubble">
-                        <p>"每天用5分钟做呼吸练习，压力真的减少了很多，泡泡动画超级治愈！"</p>
+                        <p id="testimonial1">"每天用5分钟做呼吸练习，压力真的减少了很多，泡泡动画超级治愈！"</p>
                     </div>
                     <div class="bb-testimonial-author">
                         <div class="bb-author-avatar">😊</div>
                         <div class="bb-author-info">
-                            <div class="bb-author-name">小雨</div>
-                            <div class="bb-author-title">设计师</div>
+                            <div class="bb-author-name" id="testimonial1Name">小雨</div>
+                            <div class="bb-author-title" id="testimonial1Title">设计师</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="bb-testimonial-card">
                     <div class="bb-testimonial-bubble">
-                        <p>"HRV监测很准确，能让我及时发现压力变化，及时调整工作节奏。"</p>
+                        <p id="testimonial2">"HRV监测很准确，能让我及时发现压力变化，及时调整工作节奏。"</p>
                     </div>
                     <div class="bb-testimonial-author">
                         <div class="bb-author-avatar">🤓</div>
                         <div class="bb-author-info">
-                            <div class="bb-author-name">程序猿</div>
-                            <div class="bb-author-title">软件工程师</div>
+                            <div class="bb-author-name" id="testimonial2Name">程序猿</div>
+                            <div class="bb-author-title" id="testimonial2Title">软件工程师</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="bb-testimonial-card">
                     <div class="bb-testimonial-bubble">
-                        <p>"界面太美了！每次打开都心情很好，坚持用了一个月，睡眠质量提升明显。"</p>
+                        <p id="testimonial3">"界面太美了！每次打开都心情很好，坚持用了一个月，睡眠质量提升明显。"</p>
                     </div>
                     <div class="bb-testimonial-author">
                         <div class="bb-author-avatar">🌸</div>
                         <div class="bb-author-info">
-                            <div class="bb-author-name">梦梦</div>
-                            <div class="bb-author-title">学生</div>
+                            <div class="bb-author-name" id="testimonial3Name">梦梦</div>
+                            <div class="bb-author-title" id="testimonial3Title">学生</div>
                         </div>
                     </div>
                 </div>
@@ -238,28 +236,28 @@
     <!-- About Section -->
     <section id="about" class="bb-section bb-about">
         <div class="bb-container">
-            <h2>关于我们</h2>
+            <h2 id="aboutTitle">关于我们</h2>
             <div class="bb-about-content">
                 <div class="bb-about-text">
-                    <h3>用科技温暖人心</h3>
-                    <p>我们是一个专注于健康科技的独立开发团队，拥有8年的移动应用开发经验。在这个快节奏的时代，我们希望用技术的力量帮助更多年轻人找回内心的平静。</p>
+                    <h3 id="aboutSubtitle">用科技温暖人心</h3>
+                    <p id="aboutP1">我们是一个专注于健康科技的独立开发团队，拥有8年的移动应用开发经验。在这个快节奏的时代，我们希望用技术的力量帮助更多年轻人找回内心的平静。</p>
                     
-                    <p>呼吸泡泡诞生于一个简单的愿望：让每个人都能轻松地学会减压，拥有更健康的生活方式。</p>
+                    <p id="aboutP2">呼吸泡泡诞生于一个简单的愿望：让每个人都能轻松地学会减压，拥有更健康的生活方式。</p>
                     
                     <div class="bb-contact-info">
-                        <h4>联系我们</h4>
+                        <h4 id="contactTitle">联系我们</h4>
                         <div class="bb-contact-links">
                             <a href="mailto:hello@breathbubbles.app" class="bb-contact-link">
                                 <span class="bb-contact-icon">📧</span>
-                                hello@breathbubbles.app
+                                <span id="contactEmailText">hello@breathbubbles.app</span>
                             </a>
                             <a href="#" class="bb-contact-link">
                                 <span class="bb-contact-icon">🐦</span>
-                                @BreathBubbles
+                                <span id="contactTwitter">@BreathBubbles</span>
                             </a>
                             <a href="#" class="bb-contact-link">
                                 <span class="bb-contact-icon">📱</span>
-                                小红书: 呼吸泡泡
+                                <span id="contactXhs">小红书: 呼吸泡泡</span>
                             </a>
                         </div>
                     </div>
@@ -278,8 +276,8 @@
     <!-- Final CTA Section -->
     <section class="bb-section bb-final-cta">
         <div class="bb-container">
-            <h2>开始你的减压之旅</h2>
-            <p>下载呼吸泡泡，让每一次呼吸都成为放松的开始</p>
+            <h2 id="finalCtaTitle">开始你的减压之旅</h2>
+            <p id="finalCtaDesc">下载呼吸泡泡，让每一次呼吸都成为放松的开始</p>
             
             <div class="bb-download-buttons">
                 <a href="#" class="bb-download-btn app-store">
@@ -307,42 +305,206 @@
                 <div class="bb-footer-brand">
                     <div class="bb-footer-logo">
                         <span class="bb-footer-logo-icon">🫧</span>
-                        <span class="bb-footer-logo-text">呼吸泡泡</span>
+                        <span class="bb-footer-logo-text" id="footerBrand">呼吸泡泡</span>
                     </div>
-                    <p>用科技帮助年轻人减压</p>
+                    <p id="footerSlogan">用科技帮助年轻人减压</p>
                 </div>
                 
                 <div class="bb-footer-links">
                     <div class="bb-footer-section">
-                        <h4>产品</h4>
-                        <a href="#features">功能介绍</a>
-                        <a href="#screenshots">产品截图</a>
-                        <a href="#breathing">呼吸练习</a>
+                        <h4 id="footerProduct">产品</h4>
+                        <a href="#features" id="footerFeatures">功能介绍</a>
+                        <a href="#screenshots" id="footerScreenshots">产品截图</a>
+                        <a href="#breathing" id="footerBreathing">呼吸练习</a>
                     </div>
                     
                     <div class="bb-footer-section">
-                        <h4>支持</h4>
-                        <a href="#">隐私政策</a>
-                        <a href="#">服务条款</a>
-                        <a href="#">帮助中心</a>
+                        <h4 id="footerSupport">支持</h4>
+                        <a href="#" id="footerPrivacy">隐私政策</a>
+                        <a href="#" id="footerTerms">服务条款</a>
+                        <a href="#" id="footerHelp">帮助中心</a>
                     </div>
                     
                     <div class="bb-footer-section">
-                        <h4>联系</h4>
-                        <a href="mailto:hello@breathbubbles.app">邮箱</a>
-                        <a href="#">Twitter</a>
-                        <a href="#">小红书</a>
+                        <h4 id="footerContact">联系</h4>
+                        <a href="mailto:hello@breathbubbles.app" id="footerEmail">邮箱</a>
+                        <a href="#" id="footerTwitter">Twitter</a>
+                        <a href="#" id="footerXhs">小红书</a>
+                    </div>
+
+                    <div class="bb-footer-section" id="footerLangSection">
+                        <h4 id="footerLanguage">语言</h4>
+                        <div class="bb-lang-switcher">
+                            <button type="button" id="langBtnZh" onclick="window.changeLanguage && changeLanguage('zh')">中文</button>
+                            <span style="margin:0 4px;">|</span>
+                            <button type="button" id="langBtnEn" onclick="window.changeLanguage && changeLanguage('en')">English</button>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div class="bb-footer-bottom">
-                <p>&copy; 2025 呼吸泡泡 (BreathBubbles). All rights reserved.</p>
+                <p id="footerCopyright">&copy; 2025 呼吸泡泡 (BreathBubbles). All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="/js/breathbubbles.min.1ced0d55aad58a39243a396d559e2a35bc8f52a47a905c06daa0d999626f7bf4.js"></script>
+    <script>
+    // Simple i18n implementation without breaking existing logic
+    (function(){
+      var translations = {
+        en: {
+          pageTitle: 'BreathBubbles - Breathe Out Stress',
+          brandName: 'BreathBubbles',
+            navFeatures: 'Features',
+            navScreenshots: 'Interfaces',
+            navBreathing: 'Practice',
+            navTestimonials: 'Feedback',
+            navAbout: 'About',
+            heroTitle: 'BreathBubbles',
+            heroSubtitle: 'BreathBubbles',
+            heroTagline: 'One breath to release stress',
+            heroDescription: 'HRV-based smart stress monitoring with soothing breathing animations to restore calm and focus',
+            featuresTitle: 'Core Features',
+            feature1Title: 'Real-time Stress Monitoring',
+            feature1Desc: 'HRV technology analyzes your stress state in real time and offers accurate health insights',
+            feature2Title: 'Guided Breathing Animation',
+            feature2Desc: 'Follow the bubble rhythm – 4-7-8 and mindful breathing bring body and mind back to calm',
+            feature3Title: 'Analytics & Insights',
+            feature3Desc: 'Stress calendar, trends, and heatmaps reveal patterns and help optimize your lifestyle',
+            feature4Title: 'Seamless Multi‑Device Sync',
+            feature4Desc: 'iPhone & Apple Watch sync so you can relax anytime, anywhere',
+            screenshotsTitle: 'Beautiful Interface',
+            screenshotsDesc: 'Healing visual design turns every use into a calming moment',
+            breathingTitle: 'Try a Breathing Exercise',
+            breathingDesc: 'Follow the bubble to breathe and feel inner calm',
+            startBreathing: 'Start',
+            breathingBubbleText: 'Inhale',
+            testimonialsTitle: 'User Feedback',
+            testimonial1: '"Just 5 minutes of breathing a day and my stress really dropped. The bubbles are super soothing!"',
+            testimonial1Name: 'Xiaoyu',
+            testimonial1Title: 'Designer',
+            testimonial2: '"HRV tracking is accurate and helps me catch stress spikes and adjust my workflow."',
+            testimonial2Name: 'Coder',
+            testimonial2Title: 'Software Engineer',
+            testimonial3: '"The UI is gorgeous! Mood lifts every time. After a month my sleep improved a lot."',
+            testimonial3Name: 'Meng',
+            testimonial3Title: 'Student',
+            aboutTitle: 'About Us',
+            aboutSubtitle: 'Technology with Warmth',
+            aboutP1: 'We are an indie health-tech team with 8 years of mobile app experience. In a fast-paced world, we help young people reclaim calm.',
+            aboutP2: 'BreathBubbles was born from a simple wish: make stress relief accessible and effortless for everyone.',
+            contactTitle: 'Contact Us',
+            contactXhs: 'Xiaohongshu: BreathBubbles',
+            finalCtaTitle: 'Start Your Stress Relief Journey',
+            finalCtaDesc: 'Download BreathBubbles and let every breath become a moment of calm',
+            footerBrand: 'BreathBubbles',
+            footerSlogan: 'Technology that helps young people de-stress',
+            footerProduct: 'Product',
+            footerFeatures: 'Features',
+            footerScreenshots: 'Screenshots',
+            footerBreathing: 'Breathing',
+            footerSupport: 'Support',
+            footerPrivacy: 'Privacy Policy',
+            footerTerms: 'Terms of Service',
+            footerHelp: 'Help Center',
+            footerContact: 'Contact',
+            footerEmail: 'Email',
+            footerTwitter: 'Twitter',
+            footerXhs: 'Xiaohongshu',
+            footerLanguage: 'Language',
+            footerCopyright: '© 2025 BreathBubbles. All rights reserved.'
+        },
+        zh: {
+          pageTitle: '呼吸泡泡 - 一口呼吸，泡走压力',
+          brandName: '呼吸泡泡',
+          navFeatures: '功能',
+          navScreenshots: '界面',
+          navBreathing: '练习',
+          navTestimonials: '反馈',
+          navAbout: '关于',
+          heroTitle: '呼吸泡泡',
+          heroSubtitle: 'BreathBubbles',
+          heroTagline: '一口呼吸，泡走压力',
+          heroDescription: '基于心率变异性(HRV)的智能压力监测，配合治愈系呼吸训练动画，帮助你找回内心的平静与专注',
+          featuresTitle: '核心功能',
+          feature1Title: '实时压力监测',
+          feature1Desc: '基于心率变异性(HRV)技术，实时分析你的压力状态，提供科学准确的健康数据',
+          feature2Title: '呼吸训练动画',
+          feature2Desc: '跟随美丽的泡泡节奏呼吸，4-7-8呼吸法与正念呼吸，让身心回归平静',
+          feature3Title: '数据统计分析',
+          feature3Desc: '压力日历、趋势图表、热力图展示，帮你了解压力变化规律，优化生活节奏',
+          feature4Title: '多端完美同步',
+          feature4Desc: 'iPhone & Apple Watch 无缝同步，随时随地开始你的减压之旅',
+          screenshotsTitle: '精美界面',
+          screenshotsDesc: '治愈系设计，让每次使用都是一次心灵的放松',
+          breathingTitle: '体验呼吸练习',
+          breathingDesc: '跟随下方的泡泡一起呼吸，感受内心的平静',
+          startBreathing: '开始练习',
+          breathingBubbleText: '吸气',
+          testimonialsTitle: '用户反馈',
+          testimonial1: '"每天用5分钟做呼吸练习，压力真的减少了很多，泡泡动画超级治愈！"',
+          testimonial1Name: '小雨',
+          testimonial1Title: '设计师',
+          testimonial2: '"HRV监测很准确，能让我及时发现压力变化，及时调整工作节奏。"',
+          testimonial2Name: '程序猿',
+          testimonial2Title: '软件工程师',
+          testimonial3: '"界面太美了！每次打开都心情很好，坚持用了一个月，睡眠质量提升明显。"',
+          testimonial3Name: '梦梦',
+          testimonial3Title: '学生',
+          aboutTitle: '关于我们',
+          aboutSubtitle: '用科技温暖人心',
+          aboutP1: '我们是一个专注于健康科技的独立开发团队，拥有8年的移动应用开发经验。在这个快节奏的时代，我们希望用技术的力量帮助更多年轻人找回内心的平静。',
+          aboutP2: '呼吸泡泡诞生于一个简单的愿望：让每个人都能轻松地学会减压，拥有更健康的生活方式。',
+          contactTitle: '联系我们',
+          contactXhs: '小红书: 呼吸泡泡',
+          finalCtaTitle: '开始你的减压之旅',
+          finalCtaDesc: '下载呼吸泡泡，让每一次呼吸都成为放松的开始',
+          footerBrand: '呼吸泡泡',
+          footerSlogan: '用科技帮助年轻人减压',
+          footerProduct: '产品',
+          footerFeatures: '功能介绍',
+          footerScreenshots: '产品截图',
+          footerBreathing: '呼吸练习',
+          footerSupport: '支持',
+          footerPrivacy: '隐私政策',
+          footerTerms: '服务条款',
+          footerHelp: '帮助中心',
+          footerContact: '联系',
+          footerEmail: '邮箱',
+          footerTwitter: 'Twitter',
+          footerXhs: '小红书',
+          footerLanguage: '语言',
+          copyright: '',
+          footerCopyright: '© 2025 呼吸泡泡 (BreathBubbles). All rights reserved.'
+        }
+      };
+      function apply(lang){
+        var dict = translations[lang] || translations.zh;
+        Object.keys(dict).forEach(function(id){
+          var el = document.getElementById(id);
+          if(el){
+            if(id === 'pageTitle') { document.title = dict[id]; }
+            else el.textContent = dict[id];
+          }
+        });
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        localStorage.setItem('bb_lang', lang);
+        var zhBtn = document.getElementById('langBtnZh');
+        var enBtn = document.getElementById('langBtnEn');
+        if(zhBtn && enBtn){
+          zhBtn.classList.toggle('active', lang==='zh');
+          enBtn.classList.toggle('active', lang==='en');
+        }
+      }
+      window.changeLanguage = function(lang){ apply(lang); };
+      document.addEventListener('DOMContentLoaded', function(){
+        var saved = localStorage.getItem('bb_lang') || 'zh';
+        apply(saved);
+      });
+    })();
+    </script>
 </body>
 </html>
