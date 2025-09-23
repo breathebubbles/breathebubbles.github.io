@@ -379,15 +379,19 @@ function addInteractiveTouches() {
   // Add loading states for download buttons
   document.querySelectorAll('.bb-download-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<div style="display: flex; align-items: center; gap: 8px;"><div style="width: 16px; height: 16px; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>Loading...</div>';
-      
-      setTimeout(() => {
-        btn.innerHTML = originalText;
-        alert('这里会跳转到相应的应用商店！');
-      }, 2000);
+      // 只对 Google Play 按钮（没有真实链接的）阻止默认行为
+      if (btn.classList.contains('google-play') || btn.getAttribute('href') === '#') {
+        e.preventDefault();
+        
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<div style="display: flex; align-items: center; gap: 8px;"><div style="width: 16px; height: 16px; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>Loading...</div>';
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          alert('敬请期待 Google Play 版本！');
+        }, 1000);
+      }
+      // App Store 按钮保持默认行为，直接跳转
     });
   });
 }
