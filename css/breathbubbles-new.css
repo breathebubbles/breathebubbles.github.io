@@ -158,6 +158,20 @@ button {
   gap: var(--bb-spacing-lg);
 }
 
+.bb-nav-links.active {
+  display: flex !important;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100vw;
+  background: var(--bb-bg-secondary);
+  box-shadow: 0 8px 32px rgba(90,169,247,0.08);
+  z-index: 999;
+  padding: var(--bb-spacing-lg) 0;
+  border-radius: 0 0 24px 24px;
+}
+
 .bb-nav-links a {
   font-weight: 500;
   color: var(--bb-text-secondary);
@@ -1005,10 +1019,6 @@ button {
    Responsive Design
 ======================================== */
 @media (max-width: 768px) {
-  .bb-nav-links {
-    display: none;
-  }
-  
   .bb-nav-mobile-toggle {
     display: flex;
   }
