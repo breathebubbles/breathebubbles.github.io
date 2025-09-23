@@ -1391,6 +1391,10 @@ button {
   filter: drop-shadow(0 15px 40px rgba(91,169,247,0.3));
   z-index: 10;
   will-change: transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .bb-bubble-inner {
@@ -1518,21 +1522,191 @@ button {
   }
 }
 
-/* Add responsive scaling for smaller screens */
-@media (max-height: 700px) {
-  .bb-breathing-bubble-container {
-    height: clamp(260px, 40vh, 350px);
+/* Enhanced Mobile Responsive for Breathing Experience */
+@media (max-width: 768px) {
+  .bb-breathing-hero {
+    min-height: 100dvh;
+    padding: 0 1rem;
   }
+  
+  .bb-hero-content {
+    padding: var(--bb-spacing-md);
+    max-width: 100%;
+  }
+  
+  .bb-breathing-bubble-container {
+    height: clamp(280px, 45vh, 380px);
+    margin-bottom: clamp(1rem, 3vh, 2rem);
+  }
+  
   .bb-breathing-bubble-main {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
+    filter: drop-shadow(0 8px 24px rgba(59,130,246,0.4));
+  }
+  
+  .bb-bubble-glow {
+    inset: -15px;
+  }
+  
+  .bb-breathing-instruction {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  
+  .bb-breathing-timer {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .bb-minimal-logo .bb-logo-icon {
+    font-size: 3.5rem;
+  }
+  
+  .bb-minimal-logo .bb-logo-text {
+    font-size: 2.2rem;
+  }
+  
+  .bb-intro-text {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .bb-start-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+  }
+  
+  .bb-wisdom-text {
+    font-size: 1.4rem;
+    padding: 0 1rem;
+  }
+  
+  .bb-choice-btn {
+    padding: 1rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .bb-choice-icon {
+    font-size: 1.8rem;
+  }
+  
+  .bb-completion-choices {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .bb-completion-glow {
+    inset: -120px;
   }
 }
 
 @media (max-width: 480px) {
+  .bb-breathing-hero {
+    padding: 0 0.75rem;
+  }
+  
+  .bb-breathing-bubble-container {
+    height: clamp(240px, 40vh, 320px);
+  }
+  
   .bb-breathing-bubble-main {
     width: 140px;
     height: 140px;
+  }
+  
+  .bb-bubble-glow {
+    inset: -12px;
+  }
+  
+  .bb-breathing-instruction {
+    font-size: 1.2rem;
+  }
+  
+  .bb-breathing-timer {
+    font-size: 2rem;
+  }
+  
+  .bb-minimal-logo .bb-logo-icon {
+    font-size: 3rem;
+  }
+  
+  .bb-minimal-logo .bb-logo-text {
+    font-size: 1.8rem;
+  }
+  
+  .bb-intro-text {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .bb-start-btn {
+    padding: 0.9rem 2rem;
+    font-size: 0.95rem;
+  }
+  
+  .bb-wisdom-text {
+    font-size: 1.2rem;
+    padding: 0 0.5rem;
+  }
+  
+  .bb-choice-btn {
+    padding: 0.9rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .bb-choice-icon {
+    font-size: 1.6rem;
+  }
+  
+  .bb-completion-glow {
+    inset: -80px;
+  }
+}
+
+/* Mobile specific animation adjustments */
+@media (max-width: 768px) {
+  .bb-hero-bg-gradient {
+    animation-duration: 40s;
+  }
+  
+  .bb-hero-bg-gradient::before {
+    animation-duration: 80s;
+  }
+  
+  .bb-breathing-bubble-container::before {
+    inset: -40px;
+    animation-duration: 30s;
+  }
+  
+  .bb-breathing-bubble-container::after {
+    opacity: 0.6;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .bb-breathing-bubble-main {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .bb-breathing-instruction {
+    font-size: 1.1rem;
+  }
+  
+  .bb-breathing-timer {
+    font-size: 1.8rem;
+  }
+  
+  .bb-minimal-logo .bb-logo-text {
+    font-size: 1.6rem;
+  }
+  
+  .bb-choice-btn {
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -2124,30 +2298,62 @@ button {
   50% { transform: translateY(-10px); }
 }
 
-/* Responsive */
+/* Responsive - Updated */
 @media (max-width: 768px) {
-  .bb-breathing-bubble-main {
-    width: 150px;
-    height: 150px;
-  }
-  
-  .bb-breathing-bubble-container {
-    height: 300px;
-  }
-  
   .bb-choice-btn {
     padding: 1rem 1.5rem;
+    font-size: 0.95rem;
   }
   
   .bb-choice-icon {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
   
   .bb-wisdom-text {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
   }
   
   .bb-completion-choices {
-    gap: var(--bb-spacing-sm);
+    gap: 1rem;
+  }
+}
+
+/* Mobile viewport meta tag support - ensure proper scaling */
+.bb-breathing-hero {
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+}
+
+.bb-breathing-bubble-main {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Improve touch responsiveness on mobile */
+.bb-start-btn, .bb-choice-btn {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Mobile Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .bb-breathing-hero {
+    min-height: -webkit-fill-available;
+  }
+  
+  .bb-hero-bg-gradient,
+  .bb-hero-bg-gradient::before {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  
+  .bb-bubble-inner,
+  .bb-bubble-glow {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 }
